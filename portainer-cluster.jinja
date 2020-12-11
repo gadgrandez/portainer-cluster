@@ -13,8 +13,8 @@ resources:
     metadata:
       items:
       - key: startup-script
-        value |
-          {{ clusterInstance["startup-script"] }}
+        value: |
+          {{ clusterInstance["startup-script"]|indent(10) }}
     disks:
     - deviceName: boot
       type: PERSISTENT
