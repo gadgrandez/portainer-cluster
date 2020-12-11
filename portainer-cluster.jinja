@@ -33,7 +33,7 @@ resources:
 - type: compute.v1.firewall
   name: portainer-firewall
   properties: 
-    network: $(ref.portainer-firewall.selfLink)
+    network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/default
     sourceRanges: ["0.0.0.0/0"]
     targetTags: ["portainer"]
     allowed:
