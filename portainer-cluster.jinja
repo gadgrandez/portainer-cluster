@@ -14,7 +14,7 @@ resources:
       items:
       - key: startup-script
         value |
-          {{ clusterInstance["startup-script"]|indent(10) }}
+          {{ clusterInstance["startup-script"] }}
     disks:
     - deviceName: boot
       type: PERSISTENT
