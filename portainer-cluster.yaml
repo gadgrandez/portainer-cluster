@@ -11,6 +11,7 @@ resources:
       machineType: f1-micro
       diskSizeGB: 10
       tags: ["portainer"]
+      gce-data-storage: data_storage_example
       startup-script: |
         #!/bin/bash
         apt update;
@@ -25,12 +26,24 @@ resources:
       zone: us-central1-f
       machineType: e2-standard-4
       diskSizeGB: 500
+      gce-data-storage: data_storage_example
       startup-script: |
         #!/bin/bash
+        # Install gcsfuse
+        GCSFUSE_REPO=gcsfuse-`lsb_release -c -s`;
+        echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list;
+        curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -;
         apt update;
-        apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common -y;
+        apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common gcsfuse -y;
         curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -;
         add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable";
         apt update;
         apt install docker-ce -y;
-    
+        mkdir -p /data;
+        DATA_STORAGE=$(curl http://metadata.google.internal/computeMetadata/v1/instance/attributes/gce-data-storage -H "Metadata-Flavor: Google");
+        gcsfuse -o allow_other --dir-mode 777 --file-mode 777 --implicit-dirs --debug_fuse --debug_gcs --debug_http --debug_invariants $DATA_STORAGE /data;
+        # Generate crontab
+        #crontab -l > /tmp/crontmp;
+        #echo "* * * * * gsutil -m rsync -d -r gs://$DATA_STORAGE /data" >> /tmp/crontmp;
+        #crontab /tmp/crontmp;
+        #rm /tmp/crontmp;
