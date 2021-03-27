@@ -15,11 +15,13 @@ El script deploy.sh será usado como punto de entrada y deberá ser ejecutado en
 
 1. Iniciar sesión en [Google Cloud Platform](https://console.google.com) y activar [Cloud Shell](https://cloud.google.com/shell)
 2. Clonar este repositorio.
+:::bash
 ~~~
 $ git clone https://github.com/gadgrandez/portainer-cluster.git
 ~~~
 3. Otorgar permisos de ejecución al script y ejecutar
 ~~~
+:::bash
 $ cd portainer-cluster
 $ chmod +x deploy.sh
 $ ./deploy.sh
@@ -27,8 +29,9 @@ $ ./deploy.sh
 > Recuerde otorgar los permisos que se le solicite al momento de ejecutar el script
 
 Al finalizar la ejecución continúe con los pasos siguientes:
-- Configurar portainer
+- [Configurar portainer](#config-portainer)
 - Configurar nextcloud
 - Crear un volumen virtual (usando el plugin webdav) en qiime
 - Configurar el contenedor de qiime2
 ## Configuración manual
+### Configurar portainer {#config-portainer}
