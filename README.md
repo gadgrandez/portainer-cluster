@@ -3,7 +3,7 @@
 ## Instalación a través de script
 Este repositorio alberga archivos de configuración para desplegar un cluster básico de docker con una instalación de portainer.
 
-El cluster está compuesto por una instancia "portainer", una instancia "nextcloud" y una instancia "qiime" de.
+El cluster está compuesto por una instancia "portainer", una instancia "nextcloud" y una instancia "qiime".
 
 | Instancia | Tipo | Tamaño de disco (GB) | Sistema Operativo | Uso | Nota |
 |:---------:|:----:|:--------------------:|:-----------------:|-----|-------|
