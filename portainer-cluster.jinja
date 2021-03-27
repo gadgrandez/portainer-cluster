@@ -34,8 +34,6 @@ resources:
     {% endif %}
     metadata:
       items:
-      - key: gce-data-storage
-        value: {{ clusterInstance["gce-data-storage"] }}
       - key: startup-script
         value: |
           {{ clusterInstance["startup-script"]|indent(10) }}
@@ -49,7 +47,7 @@ resources:
       autoDelete: true
       sizeGB: {{ clusterInstance["diskSizeGB"] }}
       initializeParams:
-        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
+        sourceImage: https://www.googleapis.com/compute/v1/{{ clusterInstance["os-image"] }}
     networkInterfaces:
     - network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/default
       accessConfigs:
@@ -66,3 +64,12 @@ resources:
     allowed:
     - IPProtocol: tcp
       ports: ["8000", "9000"]
+- type: compute.v1.firewall
+  name: nextcloud-http
+  properties: 
+    network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/default
+    sourceRanges: ["0.0.0.0/0"]
+    targetTags: ["nextcloud"]
+    allowed:
+    - IPProtocol: tcp
+      ports: ["80"]
