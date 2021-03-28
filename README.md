@@ -57,4 +57,27 @@ Para esta configuración se usará la opción de Edge Agent, la documentación s
 
 ![Configuración del endpoint](https://assets.gadgrandez.com/sites/1/portainer-add-endpoint-2.png)
 
-3. Ejecutar la linea de comando en el terminal ssh de la instancia que se quiere conectar.
+3. Se debe copiar la linea de comandos que portainer nos muestra portainer en la sección
+
+![Copiar la línea de comandos](https://assets.gadgrandez.com/sites/1/portainer-add-endpoint-3.png)
+
+4. Ejecutar la linea de comando en el terminal ssh de la instancia que se quiere conectar.\
+Para ello:
+- Se inicia una conexión SSH a la instancia objetivo. *Para este ejemplo se realizará la conexión a la instancia qiime.*
+
+![Iniciar ssh a qiime](https://assets.gadgrandez.com/sites/1/gcp-start-ssh.png)
+
+- En la terminal SSH que se acaba de iniciar se pega la linea de comandos copiado previamente y se ejecuta.
+
+![Ejecutar el comando en SSH](https://assets.gadgrandez.com/sites/1/gcp-shell-script.png)
+
+> Una vez finalizado se puede cerrar la ventana de SSH
+
+4. Verificar la instalación
+- Volviendo a la sección **"Home"** podrá encontrar la nueva conexión que se realizó.
+
+![Conexión Completa](https://assets.gadgrandez.com/sites/1/portainer-add-endpoint-4.png)
+
+- Al presionar en la conexión se abrirá el panel de resumen
+
+![Resumen de endpoint](https://assets.gadgrandez.com/sites/1/portainer-dashboard.png)
