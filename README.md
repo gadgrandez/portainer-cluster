@@ -28,7 +28,7 @@ $ ./deploy.sh start
 
 Al finalizar la ejecución continúe con los pasos siguientes:
 - [Configurar portainer](#configurar-portainer)
-- Configurar nextcloud
+- [Configurar nextcloud](#configurar-nextcloud)
 - Crear un volumen virtual (usando el plugin webdav) en qiime
 - Configurar el contenedor de qiime2
 ## Configuración manual
@@ -81,3 +81,5 @@ Para ello:
 - Al presionar en la conexión se abrirá el panel de resumen
 
 ![Resumen de endpoint](https://assets.gadgrandez.com/sites/1/portainer-dashboard.png)
+
+### Configurar nextcloud
