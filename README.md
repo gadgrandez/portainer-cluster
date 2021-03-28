@@ -35,26 +35,26 @@ Al finalizar la ejecución continúe con los pasos siguientes:
 ### Configurar portainer
 1. Accede a la interfaz a través del navegador usando la IP external de la instancia "portainer" y añadiendo ":9000" al final. Ejemplo: **45.100.45.50:9000**
 
-![IP Externa de portainer](https://assets.gadgrandez.com/sites/1/portainer-ip-selected.png, "IP Externa de portainer")\
-![IP de ingreso a portainer](https://assets.gadgrandez.com/sites/1/portainer-ip-ingresed.png, "IP de ingreso a portainer")
+![IP Externa de portainer](https://assets.gadgrandez.com/sites/1/portainer-ip-selected.png)\
+![IP de ingreso a portainer](https://assets.gadgrandez.com/sites/1/portainer-ip-ingresed.png)
 
 2. Se establece un nombre de usuario y contraseña para el administrador y se pulsa el botón **"Create User"**
 
-![Crear usuario admin de portainer](https://assets.gadgrandez.com/sites/1/Captura-de-pantalla-34.png, "Crear usuario admin de portainer")
+![Crear usuario admin de portainer](https://assets.gadgrandez.com/sites/1/portainer-create-admin.png)
 
 3. Se ignora la conexión inicial haciendo click en el botón **"Skip"**.
 
-![Ignorar la configuración inicial](https://assets.gadgrandez.com/sites/1/portainer-skip-initial.png, "Ignorar la configuración inicial")
+![Ignorar la configuración inicial](https://assets.gadgrandez.com/sites/1/portainer-skip-initial.png)
 
 #### Agregar endpoints
-Para esta configuración se usará la opción de Edge Agent, la documentación se encuentra [aquí](https://documentation.portainer.io/v2.0/endpoints/edge/, "Configuración de edge agent")
+Para esta configuración se usará la opción de Edge Agent, la documentación se encuentra [aquí](https://documentation.portainer.io/v2.0/endpoints/edge/)
 
 1. Se ingresa a la sección **"Endpoints"** del menú de navegación, se presiona el botón **"Add endpoint"**.
 
-![Añadir endpoint](https://assets.gadgrandez.com/sites/1/portainer-add-endpoint-1.png, "Añadir endpoint")
+![Añadir endpoint](https://assets.gadgrandez.com/sites/1/portainer-add-endpoint-1.png)
 
 2. Se elije la opción **"Edge Agent"**, se ingresa un nombre (puede ser cualquier nombre, de preferencia que sea descriptivo) y se pulsa el botón **"Add endpoint"**.
 
-![Configuración del endpoint](https://assets.gadgrandez.com/sites/1/portainer-add-endpoint-2.png, "Configuración del endpoint")
+![Configuración del endpoint](https://assets.gadgrandez.com/sites/1/portainer-add-endpoint-2.png)
 
 3. Ejecutar la linea de comando en el terminal ssh de la instancia que se quiere conectar.
