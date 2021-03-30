@@ -12,9 +12,16 @@ resources:
     {% endif %}
     metadata:
       items:
+      {% if clusterInstance.startup-script is defined %}}
       - key: startup-script
         value: |
           {{ clusterInstance["startup-script"]|indent(10) }}
+      {% endif %}
+      {% if clusterInstance.container-declaration is defined %}}
+      - key: gce-container-declaration
+        value: |
+          {{ clusterInstance["container-declaration"] }}
+      {% endif %}
     disks:
     - deviceName: boot
       type: PERSISTENT
@@ -23,6 +30,17 @@ resources:
       sizeGB: {{ clusterInstance["diskSizeGB"] }}
       initializeParams:
         sourceImage: https://www.googleapis.com/compute/v1/{{ clusterInstance["os-image"] }}
+    {% if clusterInstance.secondaryDisk is defined %}}
+    {% for secondaryDisk in clusterInstance["secondaryDisk"] %}}
+    - deviceName: {{ secondaryDisk["name"] }}
+      type: PERSISTENT
+      autoDelete: false
+      initializeParams:
+        diskName: {{ secondaryDisk["name"] }}}}
+        diskType: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/zones/{{ clusterInstance["zone"] }}/diskTypes/{{ secondaryDisk["type"] }}
+        diskSizeGB: {{ secondaryDisk["sizeGB"] }}
+    {% endfor %}} 
+    {% endif %}}
     networkInterfaces:
     - network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/default
       accessConfigs:
@@ -47,4 +65,4 @@ resources:
     targetTags: ["nextcloud"]
     allowed:
     - IPProtocol: tcp
-      ports: ["80"]
+      ports: ["80", "443"]

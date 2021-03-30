@@ -19,13 +19,14 @@ resources:
     - name: nextcloud
       zone: us-east1-b
       machineType: f1-micro
-      diskSizeGB: 500
+      diskSizeGB: 20
       tags: ["nextcloud"]
       os-image: projects/cos-cloud/global/images/cos-77-12371-1109-0
-      startup-script: |
-        #!/bin/bash
-        docker volume create nextcloud-data;
-        docker run -d --restart=always --name=nextcloud -p 80:80 -v nextcloud-data:/var/www/html nextcloud:latest;
+      secondaryDisk:
+      - name: "nextcloud-data"
+        sizeGB: 500
+        type: "pd-standard"
+      container-declaration: "spec:\n  containers:\n    - name: nextcloud\n      image: 'nextcloud:latest'\n      volumeMounts:\n        - name: pd-0\n          mountPath: /var/www/html/\n          readOnly: false\n      stdin: false\n      tty: false\n  restartPolicy: Always\n  volumes:\n    - name: pd-0\n      gcePersistentDisk:\n        pdName: nextcloud-data\n        fsType: ext4\n        readOnly: false\n\n# This container declaration format is not public API and may change without notice. Please\n# use gcloud command-line tool or Google Cloud Console to run Containers on Google Compute Engine."
     - name: qiime
       zone: us-central1-f
       machineType: e2-standard-8
@@ -40,4 +41,5 @@ resources:
         apt update;
         apt install docker-ce -y;
         docker plugin install --grant-all-permissions fentas/davfs;
+        docker pull qiime2/core:latest;
         docker volume create qiime-workspace;
