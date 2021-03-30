@@ -20,7 +20,7 @@ resources:
       {% if clusterInstance.containerDeclaration is defined %}
       - key: gce-container-declaration
         value: |
-          {{ clusterInstance["containerDeclaration"] }}
+          {{ clusterInstance["containerDeclaration"]|indent(10) }}
       {% endif %}
     disks:
     - deviceName: boot
