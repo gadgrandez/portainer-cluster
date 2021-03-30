@@ -12,7 +12,7 @@ resources:
       diskSizeGB: 20
       tags: ["portainer"]
       os-image: projects/cos-cloud/global/images/cos-77-12371-1109-0
-      startup-script: |
+      startupScript: |
         #!/bin/bash
         docker volume create portainer_data;
         docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce;
@@ -26,13 +26,13 @@ resources:
       - name: "nextcloud-data"
         sizeGB: 500
         type: "pd-standard"
-      container-declaration: "spec:\n  containers:\n    - name: nextcloud\n      image: 'nextcloud:latest'\n      volumeMounts:\n        - name: pd-0\n          mountPath: /var/www/html/\n          readOnly: false\n      stdin: false\n      tty: false\n  restartPolicy: Always\n  volumes:\n    - name: pd-0\n      gcePersistentDisk:\n        pdName: nextcloud-data\n        fsType: ext4\n        readOnly: false\n\n# This container declaration format is not public API and may change without notice. Please\n# use gcloud command-line tool or Google Cloud Console to run Containers on Google Compute Engine."
+      containerDeclaration: "spec:\n  containers:\n    - name: nextcloud\n      image: 'nextcloud:latest'\n      volumeMounts:\n        - name: pd-0\n          mountPath: /var/www/html/\n          readOnly: false\n      stdin: false\n      tty: false\n  restartPolicy: Always\n  volumes:\n    - name: pd-0\n      gcePersistentDisk:\n        pdName: nextcloud-data\n        fsType: ext4\n        readOnly: false\n\n# This container declaration format is not public API and may change without notice. Please\n# use gcloud command-line tool or Google Cloud Console to run Containers on Google Compute Engine."
     - name: qiime
       zone: us-central1-f
       machineType: e2-standard-8
       diskSizeGB: 500
       os-image: projects/debian-cloud/global/images/debian-9-stretch-v20210316
-      startup-script: |
+      startupScript: |
         #!/bin/bash
         apt update;
         apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common -y;

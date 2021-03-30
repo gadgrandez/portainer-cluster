@@ -12,15 +12,15 @@ resources:
     {% endif %}
     metadata:
       items:
-      {% if clusterInstance.startup-script is defined %}}
+      {% if clusterInstance.startupScript is defined %}}
       - key: startup-script
         value: |
-          {{ clusterInstance["startup-script"]|indent(10) }}
+          {{ clusterInstance["startupScript"]|indent(10) }}
       {% endif %}
-      {% if clusterInstance.container-declaration is defined %}}
+      {% if clusterInstance.containerDeclaration is defined %}}
       - key: gce-container-declaration
         value: |
-          {{ clusterInstance["container-declaration"] }}
+          {{ clusterInstance["containerDeclaration"] }}
       {% endif %}
     disks:
     - deviceName: boot
