@@ -12,12 +12,12 @@ resources:
     {% endif %}
     metadata:
       items:
-      {% if clusterInstance.startupScript is defined %}}
+      {% if clusterInstance.startupScript is defined %}
       - key: startup-script
         value: |
           {{ clusterInstance["startupScript"]|indent(10) }}
       {% endif %}
-      {% if clusterInstance.containerDeclaration is defined %}}
+      {% if clusterInstance.containerDeclaration is defined %}
       - key: gce-container-declaration
         value: |
           {{ clusterInstance["containerDeclaration"] }}
@@ -30,8 +30,8 @@ resources:
       sizeGB: {{ clusterInstance["diskSizeGB"] }}
       initializeParams:
         sourceImage: https://www.googleapis.com/compute/v1/{{ clusterInstance["os-image"] }}
-    {% if clusterInstance.secondaryDisk is defined %}}
-    {% for secondaryDisk in clusterInstance["secondaryDisk"] %}}
+    {% if clusterInstance.secondaryDisk is defined %}
+    {% for secondaryDisk in clusterInstance["secondaryDisk"] %}
     - deviceName: {{ secondaryDisk["name"] }}
       type: PERSISTENT
       autoDelete: false
@@ -39,8 +39,8 @@ resources:
         diskName: {{ secondaryDisk["name"] }}}}
         diskType: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/zones/{{ clusterInstance["zone"] }}/diskTypes/{{ secondaryDisk["type"] }}
         diskSizeGB: {{ secondaryDisk["sizeGB"] }}
-    {% endfor %}} 
-    {% endif %}}
+    {% endfor %}
+    {% endif %}
     networkInterfaces:
     - network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/default
       accessConfigs:
