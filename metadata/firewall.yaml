@@ -1,0 +1,2 @@
+bootcmd:
+  - iptables -P INPUT ACCEPT
