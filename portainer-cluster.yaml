@@ -1,5 +1,11 @@
 imports:
 - path: portainer-cluster.jinja
+- path: containers/nextcloud.yaml
+  name: nextcloud_container
+- path: config/portainer.yaml
+  name: portainer_cloud_config
+- path: config/nextcloud.yaml
+  name: nextcloud_cloud_config
 
 resources:
 - name: portainer-cluster
@@ -12,9 +18,9 @@ resources:
       diskSizeGB: 20
       tags: ["portainer"]
       os-image: projects/cos-cloud/global/images/cos-77-12371-1109-0
+      cloudConfig: portainer_cloud_config
       startupScript: |
         #!/bin/bash
-        iptables -P INPUT ACCEPT
         docker volume create portainer_data;
         docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce;
     - name: nextcloud
@@ -23,11 +29,12 @@ resources:
       diskSizeGB: 20
       tags: ["nextcloud"]
       os-image: projects/cos-cloud/global/images/cos-77-12371-1109-0
+      cloudConfig: nextcloud_cloud_config
       secondaryDisk:
       - name: "nextcloud-data"
         sizeGB: 500
         type: "pd-standard"
-      containerDeclaration: "spec:\n  containers:\n    - name: nextcloud\n      image: 'nextcloud:latest'\n      volumeMounts:\n        - name: pd-0\n          mountPath: /var/www/html/\n          readOnly: false\n      stdin: false\n      tty: false\n  restartPolicy: Always\n  volumes:\n    - name: pd-0\n      gcePersistentDisk:\n        pdName: nextcloud-data\n        fsType: ext4\n        readOnly: false\n\n# This container declaration format is not public API and may change without notice. Please\n# use gcloud command-line tool or Google Cloud Console to run Containers on Google Compute Engine."
+      containerManifest: nextcloud_container
     - name: qiime
       zone: us-central1-f
       machineType: e2-standard-8
@@ -43,4 +50,4 @@ resources:
         apt install docker-ce -y;
         docker plugin install --grant-all-permissions fentas/davfs;
         docker pull qiime2/core:latest;
-        docker volume create qiime-workspace;
+        docker volume create workspace;

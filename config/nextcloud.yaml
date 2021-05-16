@@ -1,0 +1,3 @@
+bootcmd:
+  - iptables -P INPUT ACCEPT
+  - mount /dev/sdb /mnt/disks/nextcloud-data
