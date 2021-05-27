@@ -18,7 +18,7 @@ resources:
       diskSizeGB: 20
       tags: ["portainer"]
       os-image: projects/cos-cloud/global/images/cos-77-12371-1109-0
-      cloudConfig: portainer_cloud_config
+#      cloudConfig: portainer_cloud_config
       startupScript: |
         #!/bin/bash
         docker volume create portainer_data;
@@ -29,7 +29,7 @@ resources:
       diskSizeGB: 20
       tags: ["nextcloud"]
       os-image: projects/cos-cloud/global/images/cos-77-12371-1109-0
-      cloudConfig: nextcloud_cloud_config
+#      cloudConfig: nextcloud_cloud_config
       secondaryDisk:
       - name: "nextcloud-data"
         sizeGB: 500
@@ -39,7 +39,7 @@ resources:
       zone: us-central1-f
       machineType: e2-standard-8
       diskSizeGB: 500
-      os-image: projects/debian-cloud/global/images/debian-9-stretch-v20210316
+      os-image: projects/debian-cloud/global/images/debian-9-stretch-v20210420
       startupScript: |
         #!/bin/bash
         apt update;
