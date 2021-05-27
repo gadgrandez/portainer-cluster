@@ -26,7 +26,7 @@ resources:
       - key: user-data
         value: |
           {{ clusterInstance["cloudConfig"]|indent(12) }}
-      {% endif %}}
+      {% endif %}
     disks:
     - deviceName: boot
       type: PERSISTENT
