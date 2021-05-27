@@ -17,11 +17,6 @@ resources:
         value: |
           {{ clusterInstance["startupScript"]|indent(10) }}
       {% endif %}
-      {% if clusterInstance.containerDeclaration is defined %}
-      - key: gce-container-declaration
-        value: |
-          {{ clusterInstance["containerDeclaration"]|indent(10) }}
-      {% endif %}
       {% if clusterInstance.containerManifest is defined %}
       - key: gce-container-declaration
         value: |
@@ -30,7 +25,7 @@ resources:
       {% if clusterInstance.cloudConfig is defined %}
       - key: user-data
         value: |
-          {{ clusterInstance["cloudConfig"]|indent(12) }}
+          {{ imports[clusterInstance["cloudConfig"]]|indent(12) }}
       {% endif %}
     disks:
     - deviceName: {{ clusterInstance['name'] }}-boot

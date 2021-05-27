@@ -22,6 +22,7 @@ resources:
         #!/bin/bash
         docker volume create portainer_data;
         docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce;
+      cloudConfig: portainer_cloud_config
     - name: nextcloud
       zone: us-east1-b
       machineType: f1-micro
@@ -33,7 +34,7 @@ resources:
         sizeGB: 500
         type: "pd-standard"
       containerManifest: nextcloud_container
-      #containerDeclaration: "spec:\n containers:\n - name: nextcloud\n image: 'nextcloud:latest'\n volumeMounts:\n - name: pd-0\n mountPath: /var/www/html/\n readOnly: false\n stdin: false\n tty: false\n restartPolicy: Always\n volumes:\n - name: pd-0\n gcePersistentDisk:\n pdName: nextcloud-data\n fsType: ext4\n readOnly: false\n\n# This container declaration format is not public API and may change without notice. Please\n# use gcloud command-line tool or Google Cloud Console to run Containers on Google Compute Engine."
+      cloudConfig: nextcloud_cloud_config
     - name: worker
       zone: us-central1-f
       machineType: e2-standard-8
