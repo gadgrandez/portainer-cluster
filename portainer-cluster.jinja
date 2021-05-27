@@ -32,11 +32,11 @@ resources:
       type: PERSISTENT
       boot: true
       autoDelete: true
-      diskSizeGb: {{ clusterInstance["diskSizeGB"] }}
+      diskSizeGb: {{ clusterInstance["diskSizeGb"] }}
       initializeParams:
         sourceImage: https://www.googleapis.com/compute/v1/{{ clusterInstance["os-image"] }}
         diskType: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/zones/{{ clusterInstance["zone"] }}/diskTypes/pd-standard
-        diskSizeGb: {{ clusterInstance["diskSizeGB"] }}
+        diskSizeGb: {{ clusterInstance["diskSizeGb"] }}
     {% if clusterInstance.secondaryDisk is defined %}
     {% for secondaryDisk in clusterInstance["secondaryDisk"] %}
     - deviceName: {{ secondaryDisk["name"] }}
@@ -44,7 +44,7 @@ resources:
       autoDelete: true
       initializeParams:
         diskType: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/zones/{{ clusterInstance["zone"] }}/diskTypes/{{ secondaryDisk["type"] }}
-        diskSizeGb: {{ secondaryDisk["sizeGB"] }}
+        diskSizeGb: {{ secondaryDisk["sizeGb"] }}
     {% endfor %}
     {% endif %}
     networkInterfaces:

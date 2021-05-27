@@ -15,7 +15,7 @@ resources:
     - name: portainer
       zone: us-east1-b
       machineType: f1-micro
-      diskSizeGB: 20.0
+      diskSizeGb: 20.0
       tags: ["portainer"]
       os-image: projects/cos-cloud/global/images/cos-stable-89-16108-403-26
       startupScript: |
@@ -26,19 +26,19 @@ resources:
     - name: nextcloud
       zone: us-east1-b
       machineType: f1-micro
-      diskSizeGB: 20.0
+      diskSizeGb: 20.0
       tags: ["nextcloud"]
       os-image: projects/cos-cloud/global/images/cos-stable-89-16108-403-26
       secondaryDisk:
       - name: "nextcloud-data"
-        sizeGB: 500
+        sizeGb: 500
         type: "pd-standard"
       containerManifest: nextcloud_container
       cloudConfig: nextcloud_cloud_config
     - name: worker
       zone: us-central1-f
       machineType: e2-standard-8
-      diskSizeGB: 500.0
+      diskSizeGb: 500.0
       os-image: projects/debian-cloud/global/images/debian-9-stretch-v20210512
       startupScript: |
         #!/bin/bash
