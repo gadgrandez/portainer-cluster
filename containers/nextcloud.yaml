@@ -4,22 +4,19 @@ metadata:
   name: nextcloud
 spec:
   containers:
-  - name: nextcloud
-    image: nextcloud:latest
-    imagePullPolicy: Always
-    stdin: false
-    tty: false
-    restartPolicy: Always
-    ports:
-      - containerPort: 80
-        hostPort: 80
-    volumeMounts:
-    - name: pd-0
-      mountPath: /var/www/html/
-      readOnly: false
-    volumes:
-    - name: pd-0
-      gcePersistentDisk:
-        pdName: nextcloud-data
-        fsType: ext4
-        readOnly: false
+    - name: nextcloud
+      image: nextcloud:latest
+      imagePullPolicy: Always
+      stdin: false
+      tty: false
+      restartPolicy: Always
+      volumeMounts:
+        - name: pd-0
+          mountPath: /var/www/html/
+          readOnly: false
+      volumes:
+        - name: pd-0
+          gcePersistentDisk:
+            pdName: nextcloud-data
+            fsType: ext4
+            readOnly: false
