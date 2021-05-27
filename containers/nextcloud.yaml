@@ -1,20 +1,14 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: nextcloud
 spec:
   containers:
     - name: nextcloud
-      image: "nextcloud:latest"
+      image: 'nextcloud:latest'
       stdin: false
       tty: false
-      ports:
-        - hostPort: 80
-          containerPort: 80
       volumeMounts:
         - name: pd-0
           mountPath: /var/www/html/
           readOnly: false
+  restartPolicy: Always
   volumes:
     - name: pd-0
       gcePersistentDisk:
