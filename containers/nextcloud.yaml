@@ -5,11 +5,9 @@ metadata:
 spec:
   containers:
     - name: nextcloud
-      image: nextcloud:latest
-      imagePullPolicy: Always
+      image: "nextcloud:latest"
       stdin: false
       tty: false
-      restartPolicy: Always
       ports:
         - hostPort: 80
           containerPort: 80
