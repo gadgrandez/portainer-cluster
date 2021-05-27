@@ -1,11 +1,11 @@
 imports:
-- path: portainer-cluster.jinja
 - path: containers/nextcloud.yaml
   name: nextcloud_container
 - path: config/portainer.yaml
   name: portainer_cloud_config
 - path: config/nextcloud.yaml
   name: nextcloud_cloud_config
+- path: portainer-cluster.jinja
 
 resources:
 - name: portainer-cluster
