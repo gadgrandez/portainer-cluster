@@ -10,13 +10,16 @@ spec:
       stdin: false
       tty: false
       restartPolicy: Always
+      ports:
+        - hostPort: 80
+          containerPort: 80
       volumeMounts:
         - name: pd-0
           mountPath: /var/www/html/
           readOnly: false
-      volumes:
-        - name: pd-0
-          gcePersistentDisk:
-            pdName: nextcloud-data
-            fsType: ext4
-            readOnly: false
+  volumes:
+    - name: pd-0
+      gcePersistentDisk:
+        pdName: nextcloud-data
+        fsType: ext4
+        readOnly: false
