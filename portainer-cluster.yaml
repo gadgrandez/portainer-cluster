@@ -18,7 +18,6 @@ resources:
       diskSizeGB: 20
       tags: ["portainer"]
       os-image: projects/cos-cloud/global/images/cos-77-12371-1109-0
-#      cloudConfig: portainer_cloud_config
       startupScript: |
         #!/bin/bash
         docker volume create portainer_data;
@@ -29,7 +28,6 @@ resources:
       diskSizeGB: 20
       tags: ["nextcloud"]
       os-image: projects/cos-cloud/global/images/cos-77-12371-1109-0
-#      cloudConfig: nextcloud_cloud_config
       secondaryDisk:
       - name: "nextcloud-data"
         sizeGB: 500
