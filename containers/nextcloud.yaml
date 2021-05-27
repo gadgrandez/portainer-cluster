@@ -6,13 +6,17 @@ spec:
   containers:
   - name: nextcloud
     image: nextcloud:latest
+    imagePullPolicy: Always
+    stdin: false
+    tty: false
+    restartPolicy: Always
+    ports:
+      - containerPort: 80
+        hostPort: 80
     volumeMounts:
     - name: pd-0
       mountPath: /var/www/html/
       readOnly: false
-      stdin: false
-      tty: false
-      restartPolicy: Always
     volumes:
     - name: pd-0
       gcePersistentDisk:
