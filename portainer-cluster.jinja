@@ -22,7 +22,7 @@ resources:
         value: |
           {{ clusterInstance["containerManifest"]|indent(12) }}
       {% endif %}
-      {% if clusterInstance.cloudConfig is defined %}}
+      {% if clusterInstance.cloudConfig is defined %}
       - key: user-data
         value: |
           {{ clusterInstance["cloudConfig"]|indent(12) }}
