@@ -34,7 +34,7 @@ resources:
       - name: "nextcloud-data"
         sizeGB: 500
         type: "pd-standard"
-      containerManifest: nextcloud_container
+      containerDeclaration: "spec:\n containers:\n - name: nextcloud\n image: 'nextcloud:latest'\n volumeMounts:\n - name: pd-0\n mountPath: /var/www/html/\n readOnly: false\n stdin: false\n tty: false\n restartPolicy: Always\n volumes:\n - name: pd-0\n gcePersistentDisk:\n pdName: nextcloud-data\n fsType: ext4\n readOnly: false\n\n# This container declaration format is not public API and may change without notice. Please\n# use gcloud command-line tool or Google Cloud Console to run Containers on Google Compute Engine."
     - name: qiime
       zone: us-central1-f
       machineType: e2-standard-8

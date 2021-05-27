@@ -17,6 +17,11 @@ resources:
         value: |
           {{ clusterInstance["startupScript"]|indent(10) }}
       {% endif %}
+      {% if clusterInstance.containerDeclaration is defined %}
+      - key: gce-container-declaration
+        value: |
+          {{ clusterInstance["containerDeclaration"]|indent(10) }}
+      {% endif %}
       {% if clusterInstance.containerManifest is defined %}
       - key: gce-container-declaration
         value: |
