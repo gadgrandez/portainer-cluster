@@ -25,7 +25,7 @@ resources:
       {% if clusterInstance.containerManifest is defined %}
       - key: gce-container-declaration
         value: |
-          {{ clusterInstance["containerManifest"]|indent(12) }}
+          {{ clusterInstance['containerManifest']|indent(12) }}
       {% endif %}
       {% if clusterInstance.cloudConfig is defined %}
       - key: user-data
@@ -33,13 +33,15 @@ resources:
           {{ clusterInstance["cloudConfig"]|indent(12) }}
       {% endif %}
     disks:
-    - deviceName: boot
+    - deviceName: {{ clusterInstance['name'] }}-boot
       type: PERSISTENT
       boot: true
       autoDelete: true
       sizeGB: {{ clusterInstance["diskSizeGB"] }}
       initializeParams:
         sourceImage: https://www.googleapis.com/compute/v1/{{ clusterInstance["os-image"] }}
+        diskType: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/zones/{{ clusterInstance["zone"] }}/diskTypes/pd-standard
+        diskSizeGB: {{ clusterInstance["diskSizeGB"] }}
     {% if clusterInstance.secondaryDisk is defined %}
     {% for secondaryDisk in clusterInstance["secondaryDisk"] %}
     - deviceName: {{ secondaryDisk["name"] }}

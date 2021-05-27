@@ -17,7 +17,7 @@ resources:
       machineType: f1-micro
       diskSizeGB: 20
       tags: ["portainer"]
-      os-image: projects/cos-cloud/global/images/cos-77-12371-1109-0
+      os-image: projects/cos-cloud/global/images/cos-stable-89-16108-403-26
       startupScript: |
         #!/bin/bash
         docker volume create portainer_data;
@@ -27,17 +27,18 @@ resources:
       machineType: f1-micro
       diskSizeGB: 20
       tags: ["nextcloud"]
-      os-image: projects/cos-cloud/global/images/cos-77-12371-1109-0
+      os-image: projects/cos-cloud/global/images/cos-stable-89-16108-403-26
       secondaryDisk:
       - name: "nextcloud-data"
         sizeGB: 500
         type: "pd-standard"
-      containerDeclaration: "spec:\n containers:\n - name: nextcloud\n image: 'nextcloud:latest'\n volumeMounts:\n - name: pd-0\n mountPath: /var/www/html/\n readOnly: false\n stdin: false\n tty: false\n restartPolicy: Always\n volumes:\n - name: pd-0\n gcePersistentDisk:\n pdName: nextcloud-data\n fsType: ext4\n readOnly: false\n\n# This container declaration format is not public API and may change without notice. Please\n# use gcloud command-line tool or Google Cloud Console to run Containers on Google Compute Engine."
-    - name: qiime
+      containerManifest: nextcloud_container
+      #containerDeclaration: "spec:\n containers:\n - name: nextcloud\n image: 'nextcloud:latest'\n volumeMounts:\n - name: pd-0\n mountPath: /var/www/html/\n readOnly: false\n stdin: false\n tty: false\n restartPolicy: Always\n volumes:\n - name: pd-0\n gcePersistentDisk:\n pdName: nextcloud-data\n fsType: ext4\n readOnly: false\n\n# This container declaration format is not public API and may change without notice. Please\n# use gcloud command-line tool or Google Cloud Console to run Containers on Google Compute Engine."
+    - name: worker
       zone: us-central1-f
       machineType: e2-standard-8
       diskSizeGB: 500
-      os-image: projects/debian-cloud/global/images/debian-9-stretch-v20210420
+      os-image: projects/debian-cloud/global/images/debian-9-stretch-v20210512
       startupScript: |
         #!/bin/bash
         apt update;

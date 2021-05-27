@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: nextcloud
-    image: 'nextcloud:latest'
+    image: nextcloud:latest
     volumeMounts:
     - name: pd-0
       mountPath: /var/www/html/
