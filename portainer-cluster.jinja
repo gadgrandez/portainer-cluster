@@ -25,7 +25,7 @@ resources:
       {% if clusterInstance.containerManifest is defined %}
       - key: gce-container-declaration
         value: |
-          {{ clusterInstance['containerManifest']|indent(12) }}
+          {{ imports[clusterInstance['containerManifest']]|indent(12) }}
       {% endif %}
       {% if clusterInstance.cloudConfig is defined %}
       - key: user-data
