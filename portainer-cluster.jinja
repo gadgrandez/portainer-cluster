@@ -48,7 +48,7 @@ resources:
     {% endfor %}
     {% endif %}
     networkInterfaces:
-    - network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/default
+    - network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/um-default
       accessConfigs:
       - name: External NAT
         type: ONE_TO_ONE_NAT
@@ -57,7 +57,7 @@ resources:
 - type: compute.v1.firewall
   name: portainer-firewall
   properties: 
-    network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/default
+    network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/um-default
     sourceRanges: ["0.0.0.0/0"]
     targetTags: ["portainer"]
     allowed:
@@ -66,7 +66,7 @@ resources:
 - type: compute.v1.firewall
   name: nextcloud-http
   properties: 
-    network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/default
+    network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/um-default
     sourceRanges: ["0.0.0.0/0"]
     targetTags: ["nextcloud"]
     allowed:
